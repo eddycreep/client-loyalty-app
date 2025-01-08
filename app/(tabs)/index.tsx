@@ -1,8 +1,8 @@
-import * as React from "react";
+import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
-import { CategoryCard } from "../../components/comp/home/foodDelivery/CategoryCard";
-import { SearchBar } from "../../components/comp/home/foodDelivery/SearchBar";
-import { Location } from "../../components/comp/home/foodDelivery/Location";
+import { CategoryCard } from "../../components/comp/home/CategoryCard";
+import { SearchBar } from "../../components/comp/home/SearchBar";
+import { Location } from "../../components/comp/home/Location";
 
 const categories = [
   {
@@ -28,84 +28,44 @@ const categories = [
 
 export default function Home() {
   return (
-    <View className="flex overflow-hidden flex-col pt-8 mx-auto w-full bg-white rounded-3xl max-w-[480px]" style={styles.titleContainer}>
-      <View className="flex flex-col px-4 w-full">
-        <View className="flex gap-5 justify-between items-center w-full text-base font-medium text-black">
-          <Image
-            // loading="lazy"
-            source={{
-              uri: "https://cdn.builder.io/api/v1/image/assets/83e343ceb2c4461a81f2d831cd0ec1db/a1f6fa693fccc9d0baaf33fa4c65b0098c3689d7bd53e8a1b60d85bfa3fa4398?apiKey=83e343ceb2c4461a81f2d831cd0ec1db&",
-            }}
-            className="object-contain shrink-0 self-stretch my-auto w-6 aspect-square"
-          />
-          <View className="flex gap-1 self-stretch my-auto">
-            <Image
-              // loading="lazy"
-              source={{
-                uri: "https://cdn.builder.io/api/v1/image/assets/83e343ceb2c4461a81f2d831cd0ec1db/9608eaa49b343bfb361aa738fb23df60f9fff19da53d6cfd648fd0ac8fcc18ad?apiKey=83e343ceb2c4461a81f2d831cd0ec1db&",
-              }}
-              className="object-contain shrink-0 w-6 aspect-square"
-            />
-            <Location city="Chicago" state="IL" />
-          </View>
-          <Image
-            // loading="lazy"
-            source={{
-              uri: "https://cdn.builder.io/api/v1/image/assets/83e343ceb2c4461a81f2d831cd0ec1db/ad51af432ba968d29e668cade676edf5347f742baff9b2f04fab7e38b8752108?apiKey=83e343ceb2c4461a81f2d831cd0ec1db&",
-            }}
-            className="object-contain shrink-0 self-stretch w-10 rounded-xl aspect-square"
-          />
-        </View>
-
-        <View className="mt-4 text-base font-semibold text-black">
-          <Text>Hey! {"\n"}Let's get your order</Text>
-        </View>
-
-        <SearchBar
-          searchIcon="https://cdn.builder.io/api/v1/image/assets/83e343ceb2c4461a81f2d831cd0ec1db/d78254fae9d0661268bd6bf1e3d8442016c91057265ece6c483a5216b0b61fb0?apiKey=83e343ceb2c4461a81f2d831cd0ec1db&"
-          placeholder="Search our delicious burgers"
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Image
+          source={{ uri: "https://example.com/logo.png" }}
+          style={styles.logo}
         />
-
-        <View className="flex gap-8 mt-6">
-          {categories.map((category, index) => (
-            <View
-              key={index}
-              className={
-                index === 0
-                  ? "flex flex-col flex-1 whitespace-nowrap"
-                  : "flex flex-col flex-1 font-medium"
-              }
-            >
-              <CategoryCard {...category} />
-              {index === 0 && (
-                <View className="self-start mt-7 text-lg font-semibold text-black">
-                  <Text>Specials</Text>
-                </View>
-              )}
-              {index === 2 && (
-                <View className="self-end mt-9 text-xs text-violet-400">
-                  <Text>View all &gt;</Text>
-                </View>
-              )}
-            </View>
-          ))}
-        </View>
+        <Location city="Chicago" state="IL" />
+        <Image
+          source={{ uri: "https://example.com/user.png" }}
+          style={styles.userAvatar}
+        />
       </View>
-      <View className="flex mt-5 w-full bg-white rounded-2xl min-h-[324px] shadow-[-6px_-6px_30px_rgba(0,0,0,0.15)]" />
+
+      <Text style={styles.greeting}>Hey! {"\n"}Let's get your order</Text>
+      {/* <SearchBar /> */}
+      <SearchBar 
+        placeholder="Search for delicious food..." 
+        searchIcon="https://example.com/search-icon.png" 
+      />
+
+
+      <View style={styles.categories}>
+        {categories.map((category, index) => (
+          <View key={index} style={styles.categoryWrapper}>
+            <CategoryCard {...category} />
+          </View>
+        ))}
+      </View>
     </View>
   );
 };
 
-
-
 const styles = StyleSheet.create({
-  titleContainer: {
-    marginTop: 16,
-    backgroundColor: "#ffffff"
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "600",
-    color: "#dd0606",
-  }
+  container: { flex: 1, backgroundColor: "white", padding: 16 },
+  header: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  logo: { width: 24, height: 24 },
+  userAvatar: { width: 40, height: 40, borderRadius: 20 },
+  greeting: { fontSize: 18, fontWeight: "bold", marginTop: 16 },
+  categories: { flexDirection: "row", marginTop: 16 },
+  categoryWrapper: { flex: 1 },
 });

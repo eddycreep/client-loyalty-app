@@ -20,7 +20,7 @@ export default function Account() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">TEST</ThemedText>
+        <ThemedText type="title">ACCOUNT COMPONENT</ThemedText>
       </ThemedView>
       <ThemedText>This app includes example code to help you get started.</ThemedText>
       <Collapsible title="File-based routing">
